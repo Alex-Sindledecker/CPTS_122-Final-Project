@@ -5,18 +5,16 @@
 * Description: Does stuff (sfml test right now)
 */
 
-#include <SFML/Graphics.hpp>
-
-enum class GameState
-{
-    PLAYING, PAUSED, MENU, TUTORIAL, QUIT
-};
+#include "GameScreen.h"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
 
     GameState gameState = GameState::MENU;
+    
+    //Initial screen to go with initial game state
+    //GameScreen* currentScreen = new MenuScreen(&gameState);
 
     while (window.isOpen())
     {
