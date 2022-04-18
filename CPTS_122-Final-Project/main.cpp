@@ -7,11 +7,16 @@
 
 #include <SFML/Graphics.hpp>
 
+enum class GameState
+{
+    PLAYING, PAUSED, MENU, TUTORIAL, QUIT
+};
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
+
+    GameState gameState = GameState::MENU;
 
     while (window.isOpen())
     {
@@ -23,7 +28,21 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+
+        switch (gameState)
+        {
+        case GameState::PLAYING:
+            break;
+        case GameState::PAUSED:
+            break;
+        case GameState::MENU:
+            break;
+        case GameState::TUTORIAL:
+            break;
+        case GameState::QUIT:
+            break;
+        }
+
         window.display();
     }
 
