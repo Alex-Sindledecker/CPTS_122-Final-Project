@@ -16,30 +16,24 @@ int main()
     //Initial screen to go with initial game state
     //GameScreen* currentScreen = new MenuScreen(&gameState);
 
+    sf::Clock clock;
     while (window.isOpen())
     {
+        float dt = clock.restart().asSeconds(); //Delta time (the time between frames). For any animated object, multiply its speed by dt to keep consistent movement across different frame rates
+
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            //currentScreen->onEvent(&event);
         }
+
+        //currentScreen->onUpdate(dt);
 
         window.clear();
 
-        switch (gameState)
-        {
-        case GameState::PLAYING:
-            break;
-        case GameState::PAUSED:
-            break;
-        case GameState::MENU:
-            break;
-        case GameState::TUTORIAL:
-            break;
-        case GameState::QUIT:
-            break;
-        }
+        //currentScreen->draw(window);
 
         window.display();
     }
