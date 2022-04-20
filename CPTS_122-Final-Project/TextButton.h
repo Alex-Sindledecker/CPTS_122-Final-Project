@@ -43,29 +43,29 @@ private:
 
 /* Button example usage:
 
-sf::RenderWindow window(...)															//
-																						//
-TextButton button("Test", 0, 0, 30, sf::Color::White, sf::Color::Red);					// Instantiation (text, x, y, text size, color, hover color)
-button.setCenterPos(window.getSize().x / 2, window.getSize().y / 2);					// Set the text to be center aligned on the screen
-button.setTextSize(50);																	// Set the size of the text
-																						//
-while (window.isOpen())																	//
-{																						//
-	sf::Event event;																	//
-	while (window.pollEvent(event))														//
-	{																					//
-		if (event.type == sf::Event::Closed)											//
-			window.close();																//
-																						//
-		if (button.isPressed(event))													// Handle button events (it getting pressed). This must always be in the event loop for the button to work
-			std::cout << "Pressed!" << std::endl;										//
-	}																					//
-																						//
-	window.clear();																		//
-																						//
-	button.draw(window);																// - Draw button to screen
-																						//
-	window.display();																	//
+sf::RenderWindow window(...)                                                                            //
+                                                                                                        //
+TextButton button("Test", 0, 0, 30, sf::Color::White, sf::Color::Red);                                  // Instantiation (text, x, y, text size, color, hover color)
+button.setCenterPos(window.getSize().x / 2, window.getSize().y / 2);                                    // Set the text to be center aligned on the screen
+button.setTextSize(50);                                                                                 // Set the size of the text
+                                                                                                        //
+while (window.isOpen())                                                                                 //
+{                                                                                                       //
+	sf::Event event;                                                                                //
+	while (window.pollEvent(event))                                                                 //
+	{                                                                                               //
+		if (event.type == sf::Event::Closed)                                                    //
+			window.close();                                                                 //
+                                                                                                        //
+		if (button.isPressed(event))                                                            // Handle button events (it getting pressed). This must always be in the event loop for the button to work
+			std::cout << "Pressed!" << std::endl;                                           //
+	}                                                                                               //
+                                                                                                        //
+	window.clear();                                                                                 //
+                                                                                                        //
+	button.draw(window);                                                                            // - Draw button to screen
+                                                                                                        //
+	window.display();                                                                               //
 
 }
 
