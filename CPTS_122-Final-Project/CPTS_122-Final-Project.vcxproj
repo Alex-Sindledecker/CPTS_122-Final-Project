@@ -153,9 +153,11 @@
   <ItemGroup>
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="PlayScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
