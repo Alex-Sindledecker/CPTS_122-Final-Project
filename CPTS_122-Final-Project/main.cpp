@@ -1,6 +1,6 @@
 /*
 * Class: CPTS_122
-* Authors: Alex Sindledecker, ...
+* Authors: Alex Sindledecker, Alondra Romero
 * Date-Created: 4/14/22
 * Description: Does stuff (sfml test right now)
 */
