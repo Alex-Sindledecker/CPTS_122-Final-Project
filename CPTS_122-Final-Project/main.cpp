@@ -1,8 +1,8 @@
 /*
 * Class: CPTS_122
-* Authors: Alex Sindledecker, Alondra Romero
+* Authors: Alex Sindledecker, Alondra Romero, Alec Barran, Khoi Vu
 * Date-Created: 4/14/22
-* Description: Does stuff (sfml test right now)
+* Description: Runs the application
 */
 
 #include "GameScreen.h"

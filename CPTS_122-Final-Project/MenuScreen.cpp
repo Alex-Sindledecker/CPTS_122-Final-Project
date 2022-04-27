@@ -1,3 +1,10 @@
+/*
+* Class: CPTS_122
+* Authors: Alec Barran
+* Date-Created: 4/20/22
+* Description: Handles the menu screen
+*/
+
 #include "MenuScreen.h"
 
 MenuScreen::MenuScreen() {

@@ -1,3 +1,10 @@
+/*
+* Class: CPTS_122
+* Authors: Alondra Romero, (edited by Alex Sindledecker)
+* Date-Created: 4/23/22
+* Description: Handles the play screen
+*/
+
 #pragma once
 
 #include "GameScreen.h"
