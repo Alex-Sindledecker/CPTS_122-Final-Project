@@ -1,8 +1,8 @@
 /*
 * Class: CPTS_122
 * Authors: Alex Sindledecker
-* Date-Created: 4/14/22
-* Description: Runs the application
+* Date-Created: 4/27/22
+* Description: Handles the pause screen
 */
 
 #pragma once

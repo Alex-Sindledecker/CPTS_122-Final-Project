@@ -1,3 +1,10 @@
+/*
+* Class: CPTS_122
+* Authors: Alex Sindledecker
+* Date-Created: 4/27/22
+* Description: Handles the pause screen
+*/
+
 #include "PauseScreen.h"
 
 PauseScreen::PauseScreen(PlayScreen* playScreen)
