@@ -53,7 +53,7 @@ PlayScreen::~PlayScreen()
 void PlayScreen::onEvent(sf::Event& event, GameState& gameState)
 {
 	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape)
-		gameState = GameState::MENU;
+		gameState = GameState::PAUSED;
 
 
 	if (event.type == sf::Event::MouseButtonPressed)  //Click of mouse releases ball
