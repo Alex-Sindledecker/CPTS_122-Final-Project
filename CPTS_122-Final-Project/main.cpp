@@ -6,15 +6,15 @@
 */
 
 #include "GameScreen.h"
+#include "MenuScreen.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Breakout");
 
-    GameState gameState = GameState::MENU;
-    
     //Initial screen to go with initial game state
-    //GameScreen* currentScreen = new MenuScreen(&gameState);
+    GameState gameState = GameState::MENU;
+    GameScreen* currentScreen = new MenuScreen;
 
     sf::Clock clock;
     while (window.isOpen())
@@ -26,14 +26,28 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-            //currentScreen->onEvent(&event);
+            currentScreen->onEvent(event, gameState);
         }
 
         //currentScreen->onUpdate(dt);
 
         window.clear();
 
-        //currentScreen->draw(window);
+        switch (gameState)
+        {
+        case GameState::PLAYING:
+            break;
+        case GameState::PAUSED:
+            break;
+        case GameState::MENU:
+            currentScreen->draw(window);
+            break;
+        case GameState::TUTORIAL:
+            break;
+        case GameState::QUIT:
+            window.close();
+            break;
+        }
 
         window.display();
     }

@@ -152,11 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="TestCases.cpp" />
     <ClCompile Include="TextButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="TestCases.h" />
     <ClInclude Include="TextButton.h" />
   </ItemGroup>
