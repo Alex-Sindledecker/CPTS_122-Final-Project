@@ -19,11 +19,11 @@ enum class GameState
 class GameScreen
 {
 public:
-    //Virtual desstructor forces abstractness
+    //Virtual destructor forces abstractness
     virtual ~GameScreen() {}
 
     //Call whenever there is an event
-    virtual void onEvent(sf::Event& event) = 0;
+    virtual void onEvent(sf::Event& event, GameState& gameState) = 0;
     //Call every frame to update the screen
     virtual void onUpdate(float dt) = 0;
     //Draw the screen

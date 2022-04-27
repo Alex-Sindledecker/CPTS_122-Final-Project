@@ -151,13 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuScreen.cpp" />
+    <ClCompile Include="TestCases.cpp" />
+    <ClCompile Include="TextButton.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="PlayScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameScreen.h" />
     <ClInclude Include="PlayScreen.h" />
+    <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="MenuScreen.h" />
+    <ClInclude Include="TestCases.h" />
+    <ClInclude Include="TextButton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
