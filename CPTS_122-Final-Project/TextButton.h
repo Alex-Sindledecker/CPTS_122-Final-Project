@@ -35,8 +35,13 @@ public:
 	void draw(sf::RenderWindow& window);
 
 private:
+	//Initializes a static font (that way we don't recreate a new font every time a button is created)
+	static void initFont();
+
+private:
+	static sf::Font font;
+
 	sf::Text text;
-	sf::Font font;
 	sf::Color color, hoverColor;
 };
 

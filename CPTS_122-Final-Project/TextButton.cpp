@@ -9,11 +9,13 @@
 
 #include <iostream>
 
+sf::Font TextButton::font;
+
 TextButton::TextButton(const std::string& str, float x, float y, int textSize, sf::Color color, sf::Color hoverColor)
 {
+	initFont();
+
 	//Initialize font
-	if (!font.loadFromFile("res/fonts/ROGFonts-Regular.otf"))
-		std::cout << "ERROR: Failed to load font: \"res/fonts/ROGFonts-Regular.otf\"" << std::endl;
 
 	//Initialize text
 	text.setFont(font);
@@ -76,4 +78,16 @@ void TextButton::draw(sf::RenderWindow& window)
 		text.setFillColor(color);
 
 	window.draw(text);
+}
+
+void TextButton::initFont()
+{
+	//Checks if the font has been initialized yet
+	static bool fontInitialized = false;
+	if (fontInitialized)
+		return;
+
+	//If it hasn't, loads the font
+	if (!font.loadFromFile("res/fonts/ROGFonts-Regular.otf"))
+		std::cout << "ERROR: Failed to load font: \"res/fonts/ROGFonts-Regular.otf\"" << std::endl;
 }
