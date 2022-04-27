@@ -7,14 +7,20 @@
 
 #include "GameScreen.h"
 #include "MenuScreen.h"
+#include "PlayScreen.h"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Breakout");
+    window.setFramerateLimit(60);
 
     //Initial screen to go with initial game state
     GameState gameState = GameState::MENU;
-    GameScreen* currentScreen = new MenuScreen;
+    
+    MenuScreen menuScreen;
+    PlayScreen playScreen(window);
+
+    GameScreen* currentScreen = &menuScreen;
 
     sf::Clock clock;
     while (window.isOpen())
@@ -26,21 +32,25 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            //Check for events on the currentScreen
             currentScreen->onEvent(event, gameState);
         }
 
-        //currentScreen->onUpdate(dt);
+        //Update current screen
+        currentScreen->onUpdate(dt);
 
         window.clear();
 
+        //Check the game state and update the current screen to match the game state
         switch (gameState)
         {
         case GameState::PLAYING:
+            currentScreen = &playScreen;
             break;
         case GameState::PAUSED:
             break;
         case GameState::MENU:
-            currentScreen->draw(window);
+            currentScreen = &menuScreen;
             break;
         case GameState::TUTORIAL:
             break;
@@ -48,6 +58,9 @@ int main()
             window.close();
             break;
         }
+
+        //Draw the current screen
+        currentScreen->draw(window);
 
         window.display();
     }

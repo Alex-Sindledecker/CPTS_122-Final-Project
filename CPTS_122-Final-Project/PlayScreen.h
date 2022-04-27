@@ -1,31 +1,28 @@
 #pragma once
-//#include "GameScreen.h"
-#include <SFML/Graphics.hpp>
 
-#include <iostream>
-using namespace std;
-using namespace sf;
+#include "GameScreen.h"
 
-class PlayScreen
+class PlayScreen : public GameScreen
 {
 public:
-	PlayScreen(int w, int h, string title);
+	PlayScreen(sf::RenderWindow& window);
 	~PlayScreen();
-	void onEvent(Event event);
-	void update(double dT);
-	void draw();
 
-	void run();
+	virtual void onEvent(sf::Event& event, GameState& gameState) override;
+	virtual void onUpdate(float dt) override;
+	virtual void draw(sf::RenderWindow& window) override;
+
 private:
-	CircleShape SpriteBall;
-	RectangleShape paddle;
-	RectangleShape block;
-	RenderWindow* window = NULL;
+	sf::CircleShape SpriteBall;
+	sf::RectangleShape paddle;
+	sf::RectangleShape block;
 	double Velocity;
 	double bounce;
-	Vector2f Vel;
+	sf::Vector2f Vel;
 	int width;
 	int height;
 	bool* isBlock;
+
+	float mouseX, mouseY;
 
 };
