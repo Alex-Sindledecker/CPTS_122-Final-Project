@@ -16,8 +16,11 @@ int main()
     GameState gameState = GameState::MENU;
     GameScreen* currentScreen = new MenuScreen;
 
+    sf::Clock clock;
     while (window.isOpen())
     {
+        float dt = clock.restart().asSeconds(); //Delta time (the time between frames). For any animated object, multiply its speed by dt to keep consistent movement across different frame rates
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -25,6 +28,8 @@ int main()
                 window.close();
             currentScreen->onEvent(event, gameState);
         }
+
+        //currentScreen->onUpdate(dt);
 
         window.clear();
 
