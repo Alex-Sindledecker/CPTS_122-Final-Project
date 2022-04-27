@@ -155,7 +155,6 @@
     <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="TestCases.cpp" />
     <ClCompile Include="TextButton.cpp" />
-    <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="PlayScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
