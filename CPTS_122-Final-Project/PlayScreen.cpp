@@ -40,7 +40,7 @@ PlayScreen::PlayScreen(sf::RenderWindow& window)
 	}
 	//Ball movement  and bounce
 
-	Velocity = 7.f;
+	Velocity = 75.f * 7.f;
 	bounce = 0.0f;
 	Vel = sf::Vector2f(0.f, 0.f);
 }
@@ -56,7 +56,7 @@ void PlayScreen::onEvent(sf::Event& event, GameState& gameState)
 		gameState = GameState::PAUSED;
 
 
-	if (event.type == sf::Event::MouseButtonPressed)  //Click of mouse releases ball
+	if (Vel.x == 0 && event.type == sf::Event::MouseButtonPressed)  //Click of mouse releases ball
 	{
 		bounce = (-20 - (rand() % 140)) * (3.14 / 180);
 		Vel.x = cos(bounce) * Velocity;
@@ -78,9 +78,8 @@ void PlayScreen::onUpdate(float dt)
 	}
 	else
 	{
-		const int ballSpeed = 100;
 		//Change in ball position this frame (delta x, delta y
-		int dx = Vel.x * dt * ballSpeed, dy = Vel.y * dt * ballSpeed;
+		int dx = Vel.x * dt, dy = Vel.y * dt;
 
 		SpriteBall.setPosition(sf::Vector2f(SpriteBall.getPosition().x + dx, SpriteBall.getPosition().y + dy));
 
@@ -89,7 +88,7 @@ void PlayScreen::onUpdate(float dt)
 			&& SpriteBall.getPosition().x < paddle.getPosition().x + paddle.getSize().x && SpriteBall.getPosition().y < paddle.getPosition().y + paddle.getSize().y)
 		{
 			SpriteBall.setPosition(sf::Vector2f(SpriteBall.getPosition().x, paddle.getPosition().y - (SpriteBall.getRadius() * 2.0f)));
-			Vel.y = -abs(Vel.y);
+			bounceBallOnPaddle();
 		}
 
 
@@ -98,24 +97,26 @@ void PlayScreen::onUpdate(float dt)
 		if (SpriteBall.getPosition().x <= 0.0f)
 		{
 			SpriteBall.setPosition(sf::Vector2f(0.0f, SpriteBall.getPosition().y));
-			Vel.x = abs(Vel.x); //when speed is not negative
+			Vel.x = -Vel.x; //when speed is not negative
 
 		}
 		else if (SpriteBall.getPosition().x + (SpriteBall.getRadius() * 2.f) >= width)
 		{
 			SpriteBall.setPosition(sf::Vector2f(width - (SpriteBall.getRadius() * 2.f), SpriteBall.getPosition().y));
-			Vel.x = abs(Vel.x);
+			Vel.x = -Vel.x;
 		}
 		if (SpriteBall.getPosition().y <= 0.0f)
 		{
 			SpriteBall.setPosition(sf::Vector2f(SpriteBall.getPosition().x, 0.f));
-			Vel.y = abs(Vel.y); //when speed is not negative
+			Vel.y = -Vel.y; //when speed is not negative
 
 		}
 		else if (SpriteBall.getPosition().y + (SpriteBall.getRadius() * 2.f) >= height)
 		{
+			//Dead
 			SpriteBall.setPosition(sf::Vector2f(SpriteBall.getPosition().x, height - (SpriteBall.getRadius() * 2.f)));
-			Vel.y = abs(Vel.y);
+			Vel.x = 0;
+			Vel.y = 0;
 		}
 		//this is where the ball colliosin with the brick would go but im not sure how to do it. 5
 
@@ -151,4 +152,22 @@ void PlayScreen::draw(sf::RenderWindow& window)
 	}
 	window.draw(paddle);
 	window.draw(SpriteBall);
+}
+
+//Bounces the ball of the paddle - based on the paddle collision response at https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-resolution
+void PlayScreen::bounceBallOnPaddle()
+{
+	//Distance ball and paddle are from each other
+	float dx = SpriteBall.getPosition().x - paddle.getPosition().x;
+	//What percent of distance is within the paddle size
+	float percentage = dx / (paddle.getSize().x / 2.f);
+	
+	//Update velocitys
+	Vel.x *= percentage * 2;
+	Vel.y = -Vel.y;
+
+	//Nomrlaize velocitys
+	float len = sqrt(pow(Vel.x, 2) + pow(Vel.y, 2));
+	Vel.x = Vel.x / len * Velocity;
+	Vel.y = Vel.y / len * Velocity;
 }
