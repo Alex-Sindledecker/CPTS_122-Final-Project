@@ -157,6 +157,7 @@
     <ClCompile Include="TestCases.cpp" />
     <ClCompile Include="TextButton.cpp" />
     <ClCompile Include="PlayScreen.cpp" />
+    <ClCompile Include="TutorialScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PauseScreen.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="TestCases.h" />
     <ClInclude Include="TextButton.h" />
+    <ClInclude Include="TutorialScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

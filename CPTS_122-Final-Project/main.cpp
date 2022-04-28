@@ -9,6 +9,7 @@
 #include "MenuScreen.h"
 #include "PlayScreen.h"
 #include "PauseScreen.h"
+#include "TutorialScreen.h"
 
 int main()
 {
@@ -21,6 +22,7 @@ int main()
     MenuScreen menuScreen;
     PlayScreen playScreen(window);
     PauseScreen pauseScreen(&playScreen);
+    TutorialScreen tutorialScreen(window);
 
     GameScreen* currentScreen = &menuScreen;
 
@@ -56,6 +58,7 @@ int main()
             currentScreen = &menuScreen;
             break;
         case GameState::TUTORIAL:
+            currentScreen = &tutorialScreen;
             break;
         case GameState::QUIT:
             window.close();
