@@ -1,6 +1,6 @@
 /*
 * Class: CPTS_122
-* Authors: Alondra Romero, (edited by Alex Sindledecker)
+* Authors: Alondra Romero, Alex Sindledecker
 * Date-Created: 4/23/22
 * Description: Handles the play screen
 */
@@ -24,30 +24,19 @@ PlayScreen::PlayScreen(sf::RenderWindow& window)
 	//block initualized
 	block.setSize(sf::Vector2f(40, 30));
 	block.setOutlineThickness(1.f);
+	block.setFillColor(sf::Color::Yellow);
+	block.setOutlineColor(sf::Color::Black);
 	//block array
-	int BlockArray;
-	BlockArray = (width / block.getSize().x) * (height / block.getSize().y);
-	isBlock = new bool[BlockArray];
-	int i;
-	for (i = 0; i < BlockArray; i++)
-	{
-		isBlock[i] = false;
-	}
 
-	for (i = 0; i < 125; i++)
-	{
-		isBlock[i] = true;
-	}
+	//Set all blocks to exist
+	for (int i = 0; i < width / block.getSize().x * 5; i++)
+		blocks.push_back(true);
+
 	//Ball movement  and bounce
 
 	Velocity = 75.f * 7.f;
 	bounce = 0.0f;
 	Vel = sf::Vector2f(0.f, 0.f);
-}
-
-PlayScreen::~PlayScreen()
-{
-	delete[] isBlock;
 }
 
 void PlayScreen::onEvent(sf::Event& event, GameState& gameState)
@@ -118,7 +107,33 @@ void PlayScreen::onUpdate(float dt)
 			Vel.x = 0;
 			Vel.y = 0;
 		}
-		//this is where the ball colliosin with the brick would go but im not sure how to do it. 5
+		
+
+		int x = 0, y = 0;
+		for (int i = 0; i < width / block.getSize().x * 5; i++)
+		{
+			if (blocks[i])
+			{
+				float l = SpriteBall.getPosition().x - SpriteBall.getRadius();
+				float r = SpriteBall.getPosition().x + SpriteBall.getRadius();
+				float u = SpriteBall.getPosition().y - SpriteBall.getRadius();
+				float d = SpriteBall.getPosition().y + SpriteBall.getRadius();
+				bool xOverlap = (l > x && l < x + block.getSize().x) || (r > x && r < x + block.getSize().x);
+				bool yOverlap = (u > y && u < y + block.getSize().y) || (d > y && d < y + block.getSize().y);
+				if (xOverlap && yOverlap)
+				{
+					Vel.y *= -1;
+					blocks[i] = false;
+				}
+			}
+			x += block.getSize().x;
+			if (x >= width)
+			{
+				x = 0;
+				y += block.getSize().y;
+			}
+		}
+		
 
 	}
 	//int direction = 1;
@@ -134,22 +149,25 @@ void PlayScreen::draw(sf::RenderWindow& window)
 	mouseX = sf::Mouse::getPosition(window).x;
 	mouseY = sf::Mouse::getPosition(window).y;
 
-	int i, j;
-
-	//Draws the Block Array 
-	for (i = 0; i < height; i += block.getSize().x)
+	//Draw blocks
+	int x = 0, y = 0;
+	for (int i = 0; i < width / block.getSize().x * 5; i++)
 	{
-		for (j = 0; j < width; j += block.getSize().y)
+		if (blocks[i])
 		{
-			if (isBlock[(int)((j / block.getSize().y) + ((i / block.getSize().x) * (width / block.getSize().y)))])
-			{
-				block.setFillColor(sf::Color::Yellow);
-				block.setOutlineColor(sf::Color::Black);
-				block.setPosition(sf::Vector2f(j, i));
-				window.draw(block);
-			}
+			block.setPosition(x, y);
+			window.draw(block);
+		}
+
+		x += block.getSize().x;
+		if (x >= width)
+		{
+			x = 0;
+			y += block.getSize().y;
 		}
 	}
+
+	//Draw paddle and ball
 	window.draw(paddle);
 	window.draw(SpriteBall);
 }

@@ -9,11 +9,12 @@
 
 #include "GameScreen.h"
 
+#include <vector>
+
 class PlayScreen : public GameScreen
 {
 public:
 	PlayScreen(sf::RenderWindow& window);
-	~PlayScreen();
 
 	virtual void onEvent(sf::Event& event, GameState& gameState) override;
 	virtual void onUpdate(float dt) override;
@@ -32,7 +33,8 @@ private:
 	sf::Vector2f Vel;
 	int width;
 	int height;
-	bool* isBlock;
+
+	std::vector<bool> blocks;
 
 	float mouseX, mouseY;
 
