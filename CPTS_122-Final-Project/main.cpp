@@ -11,6 +11,8 @@
 #include "PauseScreen.h"
 #include "TutorialScreen.h"
 
+#include "TestCases.h"
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Breakout");
@@ -25,6 +27,9 @@ int main()
     TutorialScreen tutorialScreen(window);
 
     GameScreen* currentScreen = &menuScreen;
+
+    //Start testing
+    test::startTesting();
 
     sf::Clock clock;
     while (window.isOpen())
@@ -70,6 +75,8 @@ int main()
 
         window.display();
     }
+
+    test::endTesting();
 
     return 0;
 }
